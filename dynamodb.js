@@ -2,9 +2,14 @@ import AWS from "aws-sdk";
 
 AWS.config.update({
   region: "us-east-1",
-  accessKeyId: "AKIAWCF2PMDBIJVVZTG7",
-  secretAccessKey: "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",
+  accessKeyId: process.env.ACCESS_KEY_ID,
+  secretAccessKey: process.env.SECRET_ACCESS_KEY,
 });
+
+console.log(process.env.ACCESS_KEY_ID);
+console.log(process.env.SECRET_ACCESS_KEY);
+
+console.log("is this working");
 
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 
@@ -61,8 +66,6 @@ export const deleteItem = async (name) => {
       },
     },
   };
-
-  console.log(deleteParams);
 
   try {
     await dynamodb.delete(deleteParams).promise();
